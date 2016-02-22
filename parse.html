@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="/Users/Eskra/Desktop/jquery-2.1.4.js"></script> 
+</head>
+
+<body>
+<script>
+var total = 0.0;
+
+$.ajax({
+
+	type: 'GET',
+	url: 'http://shopicruit.myshopify.com/products.json',
+	dataType: 'json',
+	success: function (data) {
+		//store products from ajax-parsed data into array
+		var products = data.products;
+		console.log(products)
+
+		for (i = 0; i < products.length; i++){
+			if(products[i].product_type == "Computer" | products[i].product_type == "Keyboard"){
+
+				//go through variants and increment price
+				for(y = 0; y < products[i].variants.length; y++){
+					total += parseFloat(products[i].variants[y].price);
+				}
+			}
+		}
+		document.write("<center>Amount you need: $" + total + "<br></center>");
+		document.write("<center>Amount you actually have: $0<br></center>");
+		document.write('<center><img src=\"http:\/\/www.blogging4jobs.com\/wp-content\/uploads\/2013\/05\/s-CRYING-large.jpeg\"></center>')
+	}
+});
+
+</script>
+</body>
+
+</html>
